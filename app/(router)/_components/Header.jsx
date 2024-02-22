@@ -1,6 +1,8 @@
 import React from 'react'
-import { Search,BellDot } from 'lucide-react'
+import { Search,BellDot, SquarePen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import {UserButton} from "@clerk/nextjs"
+import Link from 'next/link'
 function Header() {
   return (
     <div className="p-4 bg-white flex justify-between">
@@ -10,7 +12,14 @@ function Header() {
         </div>
         <div className="flex items-center gap-4">
             <BellDot className='text-gray-600'/>
-            <Button>Get Started</Button>
+            <Link href={'/write'}>
+              <SquarePen />
+            </Link>
+            <Link href={'/'}>
+             <Button>Read</Button>
+            </Link>
+            
+            <UserButton afterSignOutUrl='/'/>
         </div>
     </div>
   )

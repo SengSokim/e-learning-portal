@@ -8,6 +8,8 @@ import {
     SelectValue,
   } from "@/components/ui/select"
 import CourseItem from './CourseItem';
+import Link from 'next/link';
+
 function CourseList() {
 
     const [courseList, setCourseList] = useState();
@@ -15,14 +17,13 @@ function CourseList() {
         getAllCourses();
     
     }, [])
-    
     const getAllCourses = ()=> {
         GlobalApi.getAllCoursesList().then(response => {
            
             setCourseList(response?.courses)
         })
     }
-
+    
     return (
         <div className='p-5 bg-white rounded-lg mt-3'>
             <div className='flex items-center justify-between'>
@@ -40,9 +41,11 @@ function CourseList() {
             </div>
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3 mt-3'>
                 {courseList ? courseList.map((item,index)=> (
-                    <div key={index}>
-                        <CourseItem course={item}/>
-                    </div>
+                    <Link href={"course-preview/"+item.slug} key={index}>
+                        <div >
+                            <CourseItem course={item}/>
+                        </div>
+                    </Link>
                 ))
                 :[1,2,3,4,5,6,7,8,9].map((item,index)=>(
                     <div key={index} className="w-full h-[240px] rounded-xl m-2 bg-zinc-300 animate-pulse"></div>

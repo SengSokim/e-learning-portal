@@ -1,10 +1,12 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+
+import Main from "./(landing_page)/main/page";
+import Header from "./(landing_page)/_components/Header";
+
 export default function Home() {
   return (
     <div>
-     <Button >Button</Button>
+      <Header />
+      <Main/>
     </div>
-    
   );
 }
