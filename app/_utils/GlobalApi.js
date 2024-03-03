@@ -101,10 +101,13 @@ const getChapterById = async (slugId) => {
   return result;
 };
 
-const getPosts = async () => {
-  const query = gql`
+const getPosts = async (search, userId) => {
+  const query =
+    gql`
     query Posts {
-      posts {
+      posts(where: {_search: "` +
+    search +
+    `"}){
         id
         title
         slug
@@ -114,6 +117,15 @@ const getPosts = async () => {
           id
           name
         }
+        coverImage {
+          url
+        }
+        subscribers(where: {clerkUserId: "` +
+    userId +
+    `"}) {
+          name
+        }
+        tag
       }
     }
   `;
@@ -123,13 +135,15 @@ const getPosts = async () => {
 };
 
 const getPostById = async (slugId) => {
-    const query = gql`
+  const query =
+    gql`
     query Posts {
         post(where: {slug:"` +
-        slugId +
-        `"}) {
+    slugId +
+    `"}) {
           id
           title
+          date
           content {
             html
           }
@@ -138,19 +152,145 @@ const getPostById = async (slugId) => {
             name
           }
           slug
+          coverImage {
+            url
+          }
         }
       }
     `;
-  
-    const result = await request(MASTER_URL, query);
-    return result;
-  };
 
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
+const getReadingList = async (clerkId) => {
+  const query =
+    gql`
+    query MyQuery {
+      readingList(where: { clerkUserId: "` +
+    clerkId +
+    `" }) {
+        posts {
+          id
+          title
+          excerpt
+          date
+          slug
+          coverImage {
+            url
+          }
+          author {
+            id
+            name
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+const addToReadingList = async (clerkId, postId, name) => {
+  const query =
+    gql`
+    mutation MyQuery {
+      upsertReadingList(
+        where: { clerkUserId: "` +
+    clerkId +
+    `" }
+        upsert: {
+          create: {
+            posts: { connect: { id: "` +
+    postId +
+    `" } }
+            name: "` +
+    name +
+    `"
+          }
+          update: {
+            posts: { connect: { where: { id: "` +
+    postId +
+    `" } } }
+            name: "` +
+    name +
+    `"
+          }
+        }
+      ) {
+        id
+        name
+        posts {
+          id
+          excerpt
+          date
+          slug
+          title
+        }
+        clerkUserId
+      }
+      publishManyReadingListsConnection {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+      publishManyPostsConnection {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
+const removeFromReadingList = async (clerkId, postId) => {
+  const query = gql`
+    mutation MyQuery {
+      updateReadingList(
+        where: { clerkUserId: "`+clerkId+`" }
+        data: { posts: { disconnect: { id: "`+postId+`" } } }
+      ) {
+        id
+        name
+        posts {
+          id
+        }
+      }
+      publishManyReadingListsConnection {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+      publishManyPostsConnection {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await request(MASTER_URL, query);
+  return result;
+};
 export default {
   getAllCoursesList,
   getSidebanner,
   getCourseById,
   getChapterById,
   getPosts,
-  getPostById
+  getPostById,
+  getReadingList,
+  addToReadingList,
+  removeFromReadingList
 };

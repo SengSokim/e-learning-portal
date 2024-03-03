@@ -2,6 +2,7 @@ import { Inter, Kantumruy_Pro} from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import Header from "./(landing_page)/_components/Header";
+import Scroll from "@/components/scroll";
 const inter = Inter({ subsets: ["latin"] });
 const kamtumruy_pro = Kantumruy_Pro({ 
   weight: "400",
@@ -16,7 +17,8 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en" className={kamtumruy_pro.className}> 
-        <body className='bg-gray-200 h-screen'>
+        <Scroll />
+        <body className='bg-gray-200 h-screen '>
           {children}
         </body>
       </html>

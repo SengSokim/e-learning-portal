@@ -31,8 +31,8 @@ function Sidebar() {
     'CSS'
   ]
   return (
-    <div className="p-3 text-black">
-      <div className="p-3 bg-white text-black rounded-md">
+    <div className="p-3 text-black ">
+      <div className="p-3 bg-white text-black rounded-md ">
         <h4 className="font-semibold text-[16px]">Staff Picks</h4>
         {staffPicks.map((item, index) => (
           <div className="my-2" key={index}>
@@ -49,11 +49,11 @@ function Sidebar() {
                 </h5>
               </div>
             </div>
-            <h3 className="font-medium mt-3 text-[14px]">{item.title}</h3>
+            <h4 className="font-medium mt-3 text-[14px]">{item.title}</h4>
           </div>
         ))}
       </div>
-      <div className="p-3 bg-white text-black rounded-md mt-3">
+      <div className="p-3 bg-white text-black rounded-md mt-3 ">
         <h4 className="font-semibold my-4 text-[16px]">Recommended topics</h4>
         <div className="grid grid-cols-2 gap-3">
           {recommendedTopics.map((item,index) => (

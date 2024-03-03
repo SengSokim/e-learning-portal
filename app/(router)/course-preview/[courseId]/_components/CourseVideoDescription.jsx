@@ -11,6 +11,7 @@ function CourseVideoDescription({course}) {
   
   return (
     <div className='p-3'>
+      <title>{course.name}</title>
       <h2 className="text-[20px] font-semibold">{course.name}</h2>
       <Image src={course.coverImage.url} width={250} height={250} alt="coverImg"/>
       <p>

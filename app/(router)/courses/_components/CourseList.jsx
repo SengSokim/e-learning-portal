@@ -41,7 +41,7 @@ function CourseList() {
             </div>
             <div className='grid grid-cols-2 lg:grid-cols-3 gap-3 mt-3'>
                 {courseList ? courseList.map((item,index)=> (
-                    <Link href={"course-preview/"+item.slug} key={index}>
+                    <Link href={"course-preview/"+item.slug} key={index} prefetch>
                         <div >
                             <CourseItem course={item}/>
                         </div>

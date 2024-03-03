@@ -9,6 +9,7 @@ function Courses() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 p-5">
+      <title>Courses</title>
       <div className="col-span-3">
         <WelcomeBanner />
 
