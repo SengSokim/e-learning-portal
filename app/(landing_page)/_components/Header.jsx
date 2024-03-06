@@ -8,7 +8,7 @@ import Link from "next/link";
 
 function Header() {
   const { userId } = auth();
-  
+  const checkUser = userId || false;
   return (
     <div className="p-4 bg-white">
       <div className="flex justify-between lg:mx-[100px]">
@@ -33,7 +33,7 @@ function Header() {
             <SquarePen />
           </Link>
 
-          {!userId ? (
+          {!checkUser ? (
             <div className="flex">
               <Link href={'/sign-in'}>
                 <Button className="mr-3 hidden md:block">Log In</Button>

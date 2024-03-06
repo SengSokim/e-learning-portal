@@ -251,11 +251,16 @@ const addToReadingList = async (clerkId, postId, name) => {
 };
 
 const removeFromReadingList = async (clerkId, postId) => {
-  const query = gql`
+  const query =
+    gql`
     mutation MyQuery {
       updateReadingList(
-        where: { clerkUserId: "`+clerkId+`" }
-        data: { posts: { disconnect: { id: "`+postId+`" } } }
+        where: { clerkUserId: "` +
+    clerkId +
+    `" }
+        data: { posts: { disconnect: { id: "` +
+    postId +
+    `" } } }
       ) {
         id
         name
@@ -283,6 +288,43 @@ const removeFromReadingList = async (clerkId, postId) => {
   const result = await request(MASTER_URL, query);
   return result;
 };
+
+const staffPicks = async () => {
+  const query = gql`
+    query MyQuery {
+      posts(where: { staffPicks: true }) {
+        id
+        title
+        tag
+        slug
+        author {
+          id
+          name
+        }
+      }
+    }
+  `;
+
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
+const recommendations = async () => {
+  const query = gql`
+    query MyQuery {
+      posts(where: { recommendation: true }) {
+        id
+        title
+        tag
+        slug
+        author {
+          id
+          name
+        }
+      }
+    }
+  `;
+};
 export default {
   getAllCoursesList,
   getSidebanner,
@@ -292,5 +334,7 @@ export default {
   getPostById,
   getReadingList,
   addToReadingList,
-  removeFromReadingList
+  removeFromReadingList,
+  staffPicks,
+  recommendations
 };
