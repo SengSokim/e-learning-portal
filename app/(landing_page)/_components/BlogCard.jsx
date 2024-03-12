@@ -11,23 +11,35 @@ import SuccessAlert from "./SuccessAlert";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 function BlogCard() {
   const [posts, setPosts] = useState();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
   const searchParams = useSearchParams();
   const search = searchParams.get("query") || "";
   const userId = user?.id || '';
   const [showToast, setShowToast] = useState(false);
   const supabase = createClientComponentClient()
   useEffect(() => {
-    const getData = async () => {
-      const { data } = await supabase.auth.getUser()
-   
-      setUser(data.user)
-      setEmail(data.user.email)
-      setIsLoaded(true)
-    }
-    getData()
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+          throw error;
+        }
+
+        const { email: userEmail, user: userData } = data || {};
+
+        setUser(userData);
+        setEmail(userEmail);
+        setIsLoaded(true);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        // Handle the error as needed, e.g., redirect to login page
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
