@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useEffect, useMemo, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import isHotkey from 'is-hotkey'
 import { Editable, withReact, useSlate, Slate, useFocused } from 'slate-react'
 import {
@@ -29,6 +29,7 @@ const RichTextEditor = () => {
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
+  const [initValue, setInitValue] = useState();
   useEffect(() => {
     const initialValue = useMemo(
       () =>
@@ -40,12 +41,13 @@ const RichTextEditor = () => {
         ],
       []
     )
+    setInitValue(initialValue)
   }, [])
   
   return (
     <Slate 
       editor={editor} 
-      initialValue={initialValue}
+      initialValue={initValue}
       onChange={value => {
         const isAstChange = editor.operations.some(
           op => 'set_selection' !== op.type
