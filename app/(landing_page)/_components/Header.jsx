@@ -3,7 +3,6 @@ import { BellDot, Search, SquarePen } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import { createClient } from "@/utils/supabase/server";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -14,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/app/(auth)/login/actions";
+import { createClient } from "@/app/_utils/supabase/client";
 
 async function Header() {
   const supabase = createClient();

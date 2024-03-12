@@ -3,10 +3,6 @@ import { Search,BellDot, SquarePen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 import Link from 'next/link'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { createClient } from '@/utils/supabase/server'
-import { signOut } from '@/app/(auth)/login/actions'
  function Header() {
   
   return (

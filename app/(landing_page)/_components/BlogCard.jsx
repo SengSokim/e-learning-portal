@@ -7,7 +7,6 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 import Date from "@/components/date";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import SuccessAlert from "./SuccessAlert";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 function BlogCard() {
