@@ -3,7 +3,8 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 import Date from "@/components/date";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
 import { BookmarkPlus, BookmarkMinus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,16 +13,30 @@ import SuccessAlert from "../_components/SuccessAlert";
 
 function Bookmark() {
   const [posts, setPosts] = useState([]);
-  const { isLoaded, userId } = useAuth();
+  const [userId, setUserId] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const supabase = createClientComponentClient()
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await supabase.auth.getUser()
+      setUserId(data.user.id)
+      setIsLoaded(true)
+    }
+    getData()
+  }, []);
+  
+
   const [showToast, setShowToast] = useState(false);
   useEffect(() => {
     isLoaded && getReadingList(userId);
-  }, []);
+  }, [userId]);
   const getReadingList = (userId) => {
     GlobalApi.getReadingList(userId).then((response) => {
+     
       setPosts(response.readingList?.posts);
     });
   };
+  
   function removeFromlist(postId) {
     if (isLoaded) {
       GlobalApi.removeFromReadingList(userId, postId).then((response) => {

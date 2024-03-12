@@ -120,10 +120,10 @@ const getPosts = async (search, userId) => {
         coverImage {
           url
         }
-        subscribers(where: {clerkUserId: "` +
+        subscribers(where: {userId: "` +
     userId +
     `"}) {
-          name
+          email
         }
         tag
       }
@@ -163,12 +163,12 @@ const getPostById = async (slugId) => {
   return result;
 };
 
-const getReadingList = async (clerkId) => {
+const getReadingList = async (userId) => {
   const query =
     gql`
     query MyQuery {
-      readingList(where: { clerkUserId: "` +
-    clerkId +
+      readingList(where: { userId: "` +
+    userId +
     `" }) {
         posts {
           id
@@ -191,35 +191,35 @@ const getReadingList = async (clerkId) => {
   const result = await request(MASTER_URL, query);
   return result;
 };
-const addToReadingList = async (clerkId, postId, name) => {
+const addToReadingList = async (userId, postId, email) => {
   const query =
     gql`
     mutation MyQuery {
       upsertReadingList(
-        where: { clerkUserId: "` +
-    clerkId +
+        where: { userId: "` +
+    userId +
     `" }
         upsert: {
           create: {
             posts: { connect: { id: "` +
     postId +
     `" } }
-            name: "` +
-    name +
+            email: "` +
+    email +
     `"
           }
           update: {
             posts: { connect: { where: { id: "` +
     postId +
     `" } } }
-            name: "` +
-    name +
+            email: "` +
+    email +
     `"
           }
         }
       ) {
         id
-        name
+        email
         posts {
           id
           excerpt
@@ -227,7 +227,7 @@ const addToReadingList = async (clerkId, postId, name) => {
           slug
           title
         }
-        clerkUserId
+        userId
       }
       publishManyReadingListsConnection {
         edges {
@@ -250,20 +250,20 @@ const addToReadingList = async (clerkId, postId, name) => {
   return result;
 };
 
-const removeFromReadingList = async (clerkId, postId) => {
+const removeFromReadingList = async (userId, postId) => {
   const query =
     gql`
     mutation MyQuery {
       updateReadingList(
-        where: { clerkUserId: "` +
-    clerkId +
+        where: { userId: "` +
+    userId +
     `" }
         data: { posts: { disconnect: { id: "` +
     postId +
     `" } } }
       ) {
         id
-        name
+        email
         posts {
           id
         }
@@ -324,6 +324,8 @@ const recommendations = async () => {
       }
     }
   `;
+  const result = await request(MASTER_URL, query);
+  return result;
 };
 export default {
   getAllCoursesList,

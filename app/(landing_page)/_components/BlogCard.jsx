@@ -1,32 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  BookmarkMinus,
-  BookmarkPlus,
-  Loader2,
-  MoreHorizontal,
-  Search,
-} from "lucide-react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { BookmarkMinus, BookmarkPlus, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import GlobalApi from "@/app/_utils/GlobalApi";
 import Date from "@/components/date";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { useUser } from "@clerk/nextjs";
 import SuccessAlert from "./SuccessAlert";
-
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 function BlogCard() {
   const [posts, setPosts] = useState();
+  const [user, setUser] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [email, setEmail] = useState();
   const searchParams = useSearchParams();
   const search = searchParams.get("query") || "";
-  const { user, isLoaded } = useUser();
-  const userId = user?.id || "";
-  const fullName = user?.fullName || "";
+  const userId = user?.id || '';
   const [showToast, setShowToast] = useState(false);
+  const supabase = createClientComponentClient()
   useEffect(() => {
-    getAllPosts(search, userId);
+    const getData = async () => {
+      const { data } = await supabase.auth.getUser()
+   
+      setUser(data.user)
+      setEmail(data.user.email)
+      setIsLoaded(true)
+    }
+    getData()
+  }, []);
+
+  useEffect(() => {
+    isLoaded && getAllPosts(search, userId);
   }, [search, userId]);
 
   const getAllPosts = (search, userId) => {
@@ -37,7 +43,7 @@ function BlogCard() {
 
   function addToList(postId) {
     if (isLoaded) {
-      GlobalApi.addToReadingList(userId, postId, fullName).then((response) => {
+      GlobalApi.addToReadingList(userId, postId, email).then((response) => {
         if (response.upsertReadingList.id) {
           getAllPosts(search, userId);
           setShowToast(true);

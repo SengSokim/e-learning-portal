@@ -39,7 +39,7 @@ const RichTextEditor = () => {
       ],
     []
   )
-      console.log(initialValue)
+  
   return (
     <Slate 
       editor={editor} 

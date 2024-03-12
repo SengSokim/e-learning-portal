@@ -1,14 +1,13 @@
 "use client";
-import GlobalApi from "@/app/_utils/GlobalApi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useAuth } from "@clerk/nextjs";
+
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import BlogCard from "../_components/BlogCard";
 import Sidebar from "../_components/Sidebar";
 
@@ -35,7 +34,6 @@ function Main() {
   const pathname = usePathname();
   const { replace } = useRouter();
   const [search, setSearch] = useState("");
- 
   function handleSearch() {
     const params = new URLSearchParams(searchParams);
     if (search) {
