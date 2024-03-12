@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/app/(auth)/login/actions";
-import { createClient } from "@/app/_utils/supabase/client";
+import { createClient } from "@/app/_utils/supabase/server";
 
 async function Header() {
   const supabase = createClient();
