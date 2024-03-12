@@ -29,16 +29,18 @@ const RichTextEditor = () => {
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
-  const initialValue = useMemo(
-    () =>
-      JSON.parse(localStorage.getItem('content')) || [
-        {
-          type: 'paragraph',
-          children: [{ text: 'A line of text in a paragraph.' }],
-        },
-      ],
-    []
-  )
+  useEffect(() => {
+    const initialValue = useMemo(
+      () =>
+        JSON.parse(localStorage.getItem('content')) || [
+          {
+            type: 'paragraph',
+            children: [{ text: 'A line of text in a paragraph.' }],
+          },
+        ],
+      []
+    )
+  }, [])
   
   return (
     <Slate 
