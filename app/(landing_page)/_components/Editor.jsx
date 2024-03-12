@@ -31,20 +31,30 @@ const RichTextEditor = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
   const [initValue, setInitValue] = useState();
   useEffect(() => {
-    const initialValue = useMemo(
-      () =>
-        JSON.parse(localStorage.getItem('content')) || [
+    try {
+      const storedValue = localStorage.getItem('content');
+      const parsedValue = storedValue ? JSON.parse(storedValue) : null;
+
+      // Ensure parsedValue is an array before setting the state
+      if (Array.isArray(parsedValue)) {
+        setInitValue(parsedValue);
+      } else {
+        // Handle the case when the parsed value is not an array (optional)
+        console.error('Invalid data in localStorage. Using default value.');
+        setInitValue([
           {
             type: 'paragraph',
             children: [{ text: 'A line of text in a paragraph.' }],
           },
-        ],
-      []
-    )
-    setInitValue(initialValue)
-  }, [])
+        ]);
+      }
+    } catch (error) {
+      // Handle JSON.parse errors (optional)
+      console.error('Error parsing JSON from localStorage:', error);
+    }
+  }, []);
   
-  return (
+  return initValue && (
     <Slate 
       editor={editor} 
       initialValue={initValue}
