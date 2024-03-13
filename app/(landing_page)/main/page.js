@@ -71,19 +71,20 @@ function Main() {
                 </Link>
               ))}
             </div>
-
-            <div className="flex items-center">
-              <Input
-                placeholder="Search..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <Suspense>
-                <Button onClick={handleSearch} type="button" className="ml-3 ">
-                  <Search className="h-4 w-4" />
-                </Button>
-              </Suspense>
-            </div>
+            <Suspense fallback={<div>Loading...</div>}>
+              <div className="flex items-center">
+                <Input
+                  placeholder="Search..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                
+                  <Button onClick={handleSearch} type="button" className="ml-3 ">
+                    <Search className="h-4 w-4" />
+                  </Button>
+                
+              </div>
+            </Suspense>
           </div>
           <Separator className="bg-zinc-700 mt-3" />
           <div className="">
