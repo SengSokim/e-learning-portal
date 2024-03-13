@@ -7,10 +7,10 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import BlogCard from "../_components/BlogCard";
 import Sidebar from "../_components/Sidebar";
-import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 function Main() {
   const contentCategories = [
     {
@@ -34,7 +34,7 @@ function Main() {
   const pathname = usePathname();
   const { replace } = useRouter();
   const [search, setSearch] = useState("");
-  const {user} = useKindeBrowserClient();
+  const { user } = useKindeBrowserClient();
   function handleSearch() {
     const params = new URLSearchParams(searchParams);
     if (search) {
@@ -54,8 +54,13 @@ function Main() {
           <div className="text-black bg-white flex-no-wrap sticky top-0 z-10 flex items-center space-x-4 text-sm p-3 rounded-md justify-between">
             <div className="flex gap-5">
               {contentCategories.map((item, index) => (
-                
-                <Link href={item.url} key={index} className={!user && item.url == '/reading-list' ? 'hidden':''}>
+                <Link
+                  href={item.url}
+                  key={index}
+                  className={
+                    !user && item.url == "/reading-list" ? "hidden" : ""
+                  }
+                >
                   <div
                     className={`hover:text-violet-600 transition-all ease-in-out duration-200 ${
                       index == 1 && " text-violet-600"
@@ -73,10 +78,11 @@ function Main() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-
-              <Button onClick={handleSearch} type="button" className="ml-3 ">
-                <Search className="h-4 w-4" />
-              </Button>
+              <Suspense>
+                <Button onClick={handleSearch} type="button" className="ml-3 ">
+                  <Search className="h-4 w-4" />
+                </Button>
+              </Suspense>
             </div>
           </div>
           <Separator className="bg-zinc-700 mt-3" />
