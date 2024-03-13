@@ -6,7 +6,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "node ./scripts/add-urls-to-kinde.js"
   },
   "dependencies": {
     "@emotion/css": "^11.11.2",
