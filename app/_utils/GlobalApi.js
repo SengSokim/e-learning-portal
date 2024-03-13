@@ -201,20 +201,14 @@ const addToReadingList = async (userId, postId, email) => {
     `" }
         upsert: {
           create: {
-            posts: { connect: { id: "` +
-    postId +
-    `" } }
-            email: "` +
-    email +
-    `"
+            posts: { connect: { id: "` +postId +`" } }
+            email: "` +email +`"
+            userId:"` +userId +`"
           }
           update: {
-            posts: { connect: { where: { id: "` +
-    postId +
-    `" } } }
-            email: "` +
-    email +
-    `"
+            posts: { connect: { where: { id: "` +postId +`" } } }
+            email: "` +email +`"
+            userId:"` +userId +`"
           }
         }
       ) {

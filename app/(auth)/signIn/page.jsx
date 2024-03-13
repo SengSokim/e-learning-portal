@@ -3,8 +3,6 @@
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import React from "react";
-import { login } from "../login/actions";
-
 
 function page() {
   return (
@@ -47,7 +45,7 @@ function page() {
       <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
         <button
           className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
-          formAction={login}
+          
         >
           Log in
         </button>

@@ -8,78 +8,52 @@ import Date from "@/components/date";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import SuccessAlert from "./SuccessAlert";
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
 function BlogCard() {
   const [posts, setPosts] = useState();
-  const [user, setUser] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState();
+  const {user} = useKindeBrowserClient();
+ 
   const searchParams = useSearchParams();
   const search = searchParams.get("query") || "";
   const userId = user?.id || '';
   const [showToast, setShowToast] = useState(false);
-  const supabase = createClientComponentClient()
+ 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase.auth.getUser();
-
-        if (error) {
-          throw error;
-        }
-
-        const { email: userEmail, user: userData } = data || {};
-
-        setUser(userData);
-        setEmail(userEmail);
-        setIsLoaded(true);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        // Handle the error as needed, e.g., redirect to login page
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    isLoaded && getAllPosts(search, userId);
-  }, [search, userId]);
+    getAllPosts(search, userId);
+    setEmail(user?.email)
+  }, [search, user]);
 
   const getAllPosts = (search, userId) => {
-    GlobalApi.getPosts(search, userId).then((response) =>
+    GlobalApi.getPosts(search, userId).then((response) => {
       setPosts(response?.posts)
+    }
     );
   };
-
   function addToList(postId) {
-    if (isLoaded) {
-      GlobalApi.addToReadingList(userId, postId, email).then((response) => {
-        if (response.upsertReadingList.id) {
-          getAllPosts(search, userId);
-          setShowToast(true);
+    GlobalApi.addToReadingList(userId, postId, email).then((response) => {
+      if (response.upsertReadingList.id) {
+        getAllPosts(search, userId);
+        setShowToast(true);
 
-          setTimeout(() => {
-            setShowToast(false);
-          }, 3000);
-        }
-      });
-    }
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
+      }
+    });
   }
 
   function removeFromlist(postId) {
-    if (isLoaded) {
-      GlobalApi.removeFromReadingList(userId, postId).then((response) => {
-        if (response.updateReadingList.id) {
-          getAllPosts(search, userId);
-          setShowToast(true);
+    GlobalApi.removeFromReadingList(userId, postId).then((response) => {
+      if (response.updateReadingList.id) {
+        getAllPosts(search, userId);
+        setShowToast(true);
 
-          setTimeout(() => {
-            setShowToast(false);
-          }, 3000);
-        }
-      });
-    }
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
+      }
+    });
   }
 
   return (

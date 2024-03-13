@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { BellDot, Search, SquarePen } from "lucide-react";
 import Image from "next/image";
@@ -12,16 +13,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "@/app/(auth)/login/actions";
-import { createClient } from "@/app/_utils/supabase/server";
-
-async function Header() {
-  const supabase = createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-  const initials = user?.email.slice(0, 2) || "NA";
+import {
+  RegisterLink,
+  LoginLink,
+  LogoutLink
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
+function Header() {
+  const {user} = useKindeBrowserClient();
+  const initials = user?.given_name.slice(0, 2) || "NA";
 
   return (
     <div className="p-4 bg-white">
@@ -48,9 +48,9 @@ async function Header() {
           </Link>
           {!user ? (
             <div className="flex">
-              <Link href={"/signIn"}>
-                <Button className="mr-3 hidden md:block">Log In</Button>
-              </Link>
+              <Button className="bg-primary">
+                <LoginLink>Sign In</LoginLink>
+              </Button>
             </div>
           ) : (
             <div className="flex gap-4 items-center">
@@ -72,9 +72,9 @@ async function Header() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>
-                    <form action={signOut}>
-                      <Button>Sign Out</Button>
-                    </form>
+                    <LogoutLink>
+                      Log Out
+                    </LogoutLink>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

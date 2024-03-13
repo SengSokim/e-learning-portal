@@ -3,33 +3,22 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 import Date from "@/components/date";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import { BookmarkPlus, BookmarkMinus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import SuccessAlert from "../_components/SuccessAlert";
-
+import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
 function Bookmark() {
   const [posts, setPosts] = useState([]);
-  const [userId, setUserId] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const supabase = createClientComponentClient()
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await supabase.auth.getUser()
-      setUserId(data.user.id)
-      setIsLoaded(true)
-    }
-    getData()
-  }, []);
-  
-
+  const {user} = useKindeBrowserClient();
   const [showToast, setShowToast] = useState(false);
+
+  const userId = user?.id || '';
   useEffect(() => {
-    isLoaded && getReadingList(userId);
-  }, [userId]);
+    getReadingList(userId);
+  }, [user]);
   const getReadingList = (userId) => {
     GlobalApi.getReadingList(userId).then((response) => {
      
@@ -38,19 +27,17 @@ function Bookmark() {
   };
   
   function removeFromlist(postId) {
-    if (isLoaded) {
-      GlobalApi.removeFromReadingList(userId, postId).then((response) => {
-        if (response.updateReadingList.id) {
-          getReadingList(userId);
+    GlobalApi.removeFromReadingList(userId, postId).then((response) => {
+      if (response.updateReadingList.id) {
+        getReadingList(userId);
 
-          setShowToast(true);
+        setShowToast(true);
 
-          setTimeout(() => {
-            setShowToast(false);
-          }, 3000);
-        }
-      });
-    }
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
+      }
+    });
   }
   return posts ? (
     <div>
