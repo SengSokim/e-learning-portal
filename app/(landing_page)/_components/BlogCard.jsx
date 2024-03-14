@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -76,7 +77,7 @@ function BlogCard() {
                       <h5>3 min read</h5>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="lg:flex justify-between items-center">
                     <div>
                       <div className="mt-3">
                         <h3 className="font-semibold text-[24px]">
@@ -86,7 +87,7 @@ function BlogCard() {
 
                       <p className="my-4 text-zinc-500">{item.excerpt}</p>
                     </div>
-                    <div className="pl-2">
+                    <div className="pl-2 my-3">
                       <Image
                         width={300}
                         height={300}

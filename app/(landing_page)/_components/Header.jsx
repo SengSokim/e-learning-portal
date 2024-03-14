@@ -22,7 +22,6 @@ import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
 function Header() {
   const {user} = useKindeBrowserClient();
   const initials = user?.given_name.slice(0, 2) || "NA";
-
   return (
     <div className="p-4 bg-white">
       <div className="flex justify-between lg:mx-[100px]">

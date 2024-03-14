@@ -23,7 +23,7 @@ function Article({ params }) {
 
   return post ? (
     <div>
-      <div className="lg:mx-[150px]  text-black grid grid-cols-2 md:grid-cols-4 p-5">
+      <div className="lg:mx-[150px]  text-black grid grid-cols-2 md:grid-cols-4 lg:p-5">
         <div className="col-span-3 mr-2 ">
           <div className="mt-3 bg-white rounded-md p-5">
             <ArticleContent post={post} />

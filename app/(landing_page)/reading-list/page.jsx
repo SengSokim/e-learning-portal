@@ -42,9 +42,9 @@ function Bookmark() {
   return posts ? (
     <div>
       {showToast && <SuccessAlert />}
-      <div className="mx-[150px] mb-5">
+      <div className="lg:mx-[150px] mx-[20px] mb-5">
         <h3 className="text-[24px] font-bold">Reading List</h3>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-3">
           {posts
             ? posts.map((item, index) => (
                 <div
@@ -53,7 +53,7 @@ function Bookmark() {
                 >
                   <Link href={"/article/" + item.slug} prefetch>
                     <div className="flex justify-between text-zinc-500">
-                      <div className="flex">
+                      <div className="lg:flex">
                         <Date dateString={item.date} />
                         <Badge className="ml-3">Web</Badge>
                       </div>
@@ -61,7 +61,7 @@ function Bookmark() {
                         <h5>3 min read</h5>
                       </div>
                     </div>
-                    <div className="flex justify-between items-center">
+                    <div className="lg:flex justify-between items-center">
                       <div>
                         <div className="mt-3">
                           <h3 className="font-semibold text-[24px]">
@@ -73,7 +73,7 @@ function Bookmark() {
                           {item.excerpt.slice(0, 80) + " ..."}
                         </p>
                       </div>
-                      <div className="pl-2">
+                      <div className="pl-2 my-3">
                         <Image
                           width={300}
                           height={300}

@@ -1,16 +1,10 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { Separator } from "@/components/ui/separator";
-
-import { Search } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-import React, { Suspense, useState } from "react";
+import React from "react";
 import BlogCard from "../_components/BlogCard";
 import Sidebar from "../_components/Sidebar";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { Searchbar } from "../_components/Searchbar";
 function Main() {
   const contentCategories = [
     {
@@ -30,29 +24,16 @@ function Main() {
       url: "/reading-list",
     },
   ];
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
-  const [search, setSearch] = useState("");
-  const { user } = useKindeBrowserClient();
-  function handleSearch() {
-    const params = new URLSearchParams(searchParams);
-    if (search) {
-      params.set("query", search);
-    } else {
-      params.delete("query");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  }
+
 
   return (
     <div>
       <div
-        className={`lg:mx-[200px] text-white grid grid-cols-2 md:grid-cols-4 p-5`}
+        className={`lg:mx-[200px] text-white grid grid-cols-2 md:grid-cols-4 lg:p-5`}
       >
         <div className="col-span-3 mr-2 mt-3">
-          <div className="text-black bg-white flex-no-wrap sticky top-0 z-10 flex items-center space-x-4 text-sm p-3 rounded-md justify-between">
-            <div className="flex gap-5">
+          <div className="text-black bg-white flex-no-wrap sticky top-0 z-10 lg:flex items-center space-x-4 text-sm p-3 rounded-md justify-between">
+            <div className="flex gap-5 justify-evenly">
               {contentCategories.map((item, index) => (
                 <Link
                   href={item.url}
@@ -69,18 +50,10 @@ function Main() {
                 </Link>
               ))}
             </div>
-
-            <div className="flex items-center">
-              <Input
-                placeholder="Search..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-
-              <Button onClick={handleSearch} type="button" className="ml-3 ">
-                <Search className="h-4 w-4" />
-              </Button>
+            <div className="mt-3 lg">
+              <Searchbar />
             </div>
+            
           </div>
 
           <Separator className="bg-zinc-700 mt-3" />
