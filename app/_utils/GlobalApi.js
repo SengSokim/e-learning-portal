@@ -311,9 +311,14 @@ const recommendations = async () => {
         title
         tag
         slug
+        excerpt
+        date
         author {
           id
           name
+        }
+        coverImage {
+          url
         }
       }
     }

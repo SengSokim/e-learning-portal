@@ -64,7 +64,7 @@ function BlogCard() {
         {posts
           ? posts.map((item, index) => (
               <div
-                className="bg-white text-black rounded-md p-3 mt-3"
+                className="bg-white text-black rounded-md p-5 mt-3"
                 key={index}
               >
                 <Link href={"/article/" + item.slug} prefetch>

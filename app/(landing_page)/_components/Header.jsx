@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { BellDot, Search, SquarePen } from "lucide-react";
+import { BellDot, Home, Menu, Search, SquarePen } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
@@ -16,17 +16,28 @@ import {
 import {
   RegisterLink,
   LoginLink,
-  LogoutLink
+  LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
-import {useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
 function Header() {
-  const {user} = useKindeBrowserClient();
+  const { user } = useKindeBrowserClient();
   const initials = user?.given_name.slice(0, 2) || "NA";
   return (
     <div className="p-4 bg-white">
       <div className="flex justify-between lg:mx-[100px]">
         <div className="flex">
-          <div className="flex gap-2 border rounded-md p-2 mr-3">
+          <div className="lg:flex gap-2 border rounded-md p-2 mr-3 hidden ">
             <Link href="/">
               <Image
                 src="/next.svg"
@@ -37,6 +48,153 @@ function Header() {
                 className="w-[100px] h-auto"
               />
             </Link>
+          </div>
+          <div className="flex lg:hidden items-center hover:bg-slate-200 rounded-full p-2">
+            <Drawer direction="left">
+              <DrawerTrigger asChild>
+                <Menu />
+              </DrawerTrigger>
+              <DrawerContent className="fixed top-[-100px]">
+                <div className="p-3">
+                  <ul className="flex flex-col space-y-2">
+                    <li>
+                      <strong className="block text-xs font-medium uppercase text-gray-400">
+                        {" "}
+                        General{" "}
+                      </strong>
+
+                      <ul className="mt-2 space-y-1">
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+                          >
+                            Profile
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Team
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Projects
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Meetings
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Calendar
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <strong className="block text-xs font-medium uppercase text-gray-400">
+                        {" "}
+                        Support{" "}
+                      </strong>
+
+                      <ul className="mt-2 space-y-1">
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Update
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Help
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Settings
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <strong className="block text-xs font-medium uppercase text-gray-400">
+                        {" "}
+                        Profile{" "}
+                      </strong>
+
+                      <ul className="mt-2 space-y-1">
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Details
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            href="#"
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                          >
+                            Subscription
+                          </a>
+                        </li>
+
+                        <li>
+                          <form action="#">
+                            <button
+                              type="submit"
+                              className="block w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
+                            >
+                              Logout
+                            </button>
+                          </form>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </DrawerContent>
+            </Drawer>
+          </div>
+          <div className="flex lg:hidden items-center hover:bg-slate-200 rounded-full p-2">
+            <Link href={'/'}>
+              <Home strokeWidth={1}/>
+            </Link>
+           
+            
           </div>
         </div>
 
@@ -71,9 +229,7 @@ function Header() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
                   <DropdownMenuItem>
-                    <LogoutLink>
-                      Log Out
-                    </LogoutLink>
+                    <LogoutLink>Log Out</LogoutLink>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

@@ -11,8 +11,10 @@ import Image from "next/image";
 
 function Article({ params }) {
   const [post, setPost] = useState();
+  const [recommendations, setRecommendations] = useState([]);
   useEffect(() => {
     params && getPostById(params);
+    getRecommendation();
   }, [params]);
   
   const getPostById = (params) => {
@@ -21,7 +23,14 @@ function Article({ params }) {
     });
   };
 
-  return post ? (
+  const getRecommendation = () => {
+    GlobalApi.recommendations().then((response) => {
+    
+      setRecommendations(response?.posts);
+    })
+  }
+
+  return post && recommendations ? (
     <div>
       <div className="lg:mx-[150px]  text-black grid grid-cols-2 md:grid-cols-4 lg:p-5">
         <div className="col-span-3 mr-2 ">
@@ -29,7 +38,7 @@ function Article({ params }) {
             <ArticleContent post={post} />
           </div>
           <div className="mt-3 bg-white rounded-md p-5">
-            <RecommendSection />
+            <RecommendSection recommendations={recommendations}/>
           </div>
         </div>
 
@@ -37,7 +46,7 @@ function Article({ params }) {
           <div className="ml-2">
             <Sidebar />
 
-            <div className="bg-white p-5 rounded-lg mt-3 sticky top-3">
+            <div className="bg-white p-5 rounded-lg mt-3 sticky top-3 mb-3">
               <h3 className="font-bold text-[20px] text-zinc-600 ">
                 Learn to code 🧑‍💻
               </h3>
