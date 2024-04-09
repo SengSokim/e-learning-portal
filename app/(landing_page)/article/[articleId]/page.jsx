@@ -22,7 +22,7 @@ function Article({ params }) {
       setPost(response?.post);
     });
   };
-
+  
   const getRecommendation = () => {
     GlobalApi.recommendations().then((response) => {
     
@@ -46,7 +46,7 @@ function Article({ params }) {
           <div className="ml-2">
             <Sidebar />
 
-            <div className="bg-white p-5 rounded-lg mt-3 sticky top-3 mb-3">
+            <div className="bg-white p-5 rounded-lg mt-3 sticky top-3 mb-3 ">
               <h3 className="font-bold text-[20px] text-zinc-600 ">
                 Learn to code 🧑‍💻
               </h3>

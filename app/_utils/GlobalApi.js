@@ -1,3 +1,4 @@
+
 const { gql, default: request } = require("graphql-request");
 
 const MASTER_URL =
@@ -105,7 +106,7 @@ const getPosts = async (search, userId) => {
   const query =
     gql`
     query Posts {
-      posts(where: {_search: "` +
+      posts( where: {_search: "` +
     search +
     `"}){
         id
@@ -119,6 +120,10 @@ const getPosts = async (search, userId) => {
         }
         coverImage {
           url
+        }
+        topics {
+          id
+          name
         }
         subscribers(where: {userId: "` +
     userId +
@@ -326,6 +331,19 @@ const recommendations = async () => {
   const result = await request(MASTER_URL, query);
   return result;
 };
+
+const getTopics = async () => {
+  const query = gql`
+    query MyQuery {
+      topics {
+        id
+        name
+      }
+    }
+  `;
+  const result = await request(MASTER_URL, query);
+  return result;
+};
 export default {
   getAllCoursesList,
   getSidebanner,
@@ -337,5 +355,6 @@ export default {
   addToReadingList,
   removeFromReadingList,
   staffPicks,
-  recommendations
+  recommendations,
+  getTopics
 };

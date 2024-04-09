@@ -62,7 +62,7 @@ function Main() {
           </div>
         </div>
 
-        <div className="hidden lg:flex">
+        <div className="hidden lg:flex h-[900px] sticky top-[-200px]">
           <div className="">
             <Sidebar />
           </div>

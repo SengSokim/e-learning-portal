@@ -1,13 +1,15 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function RecommendSection({recommendations}) {
+  console.log(recommendations);
   return (
     <div className="">
       <h3 className="font-semibold text-[20px]">Recommendation</h3>
       {recommendations.map((item,index) => (
-        <div className="lg:flex justify-between items-center mt-3" key={index}>
+        <Link key={index} href={`/article/${item.slug}`}>
+        <div className="lg:flex justify-between items-center mt-3" >
           <div className="group">
             <h4 className="font-bold text-[20px] group-hover:text-violet-600">
               {item.title}
@@ -28,6 +30,7 @@ function RecommendSection({recommendations}) {
             </div>
           </div>
         </div>
+        </Link>
       ))}
     </div>
   );

@@ -29,7 +29,7 @@ function SideNav() {
     const path = usePathname();
   return (
     <div className='p-5 bg-white shadow-sm border h-screen'>
-        <Image src='/next.svg' alt='logo' width={170} height={80} priority/>
+        <Image src='/logo.svg' alt='logo' width={170} height={80} priority/>
         <hr className='mt-7'/>
         <div className='mt-8'>
             {menu.map((item,index)=> (

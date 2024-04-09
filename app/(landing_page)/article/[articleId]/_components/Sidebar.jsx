@@ -11,8 +11,8 @@ function Sidebar() {
         <h3 className="font-bold text-[20px] text-zinc-600">
           cheaDEV Community
         </h3>
-        <div className="bg-violet-300 p-3 rounded-lg w-[100px]">
-          <Image src="/next.svg" alt="logo" width={140} height={60} priority/>
+        <div className=" p-3 rounded-lg w-[100px]">
+          <Image src="/logo.svg" alt="logo" width={140} height={60} priority/>
         </div>
         <p className="mt-3 text-zinc-600 text-[14px]">
           Dedicated platform for immersive eLearning experiences and insightful

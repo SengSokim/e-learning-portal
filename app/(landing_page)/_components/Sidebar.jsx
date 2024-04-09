@@ -3,32 +3,60 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { BookmarkPlus } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 function Sidebar() {
-  const [staffPicks, setStaffPicks] = useState();
+  const [staffPicks, setStaffPicks] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
   useEffect(() => {
-    getStaffPicks();
+    Promise.all([getStaffPicks(), getTopics()])
+      .then(() => setLoading(false))
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
   }, []);
-
+  
   const getStaffPicks = () => {
-    GlobalApi.staffPicks().then((response) => {
-      setStaffPicks(response?.posts);
-    });
+    return GlobalApi.staffPicks()
+      .then((response) => {
+        setStaffPicks(response?.posts || []);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error fetching staff picks:", error);
+        throw error;
+      });
   };
-
-  const recommendedTopics = [
-    "Web development",
-    "Block chain",
-    "AI",
-    "Python",
-    "JavaScript",
-    "CSS",
-  ];
+  
+  const getTopics = () => {
+    return GlobalApi.getTopics()
+      .then((response) => {
+        setTopics(response?.topics || []);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error fetching topics:", error);
+        throw error;
+      });
+  };
+  
+  if (loading) {
+    return <div className="mt-3 ml-2 p-3 bg-zinc-300 text-black rounded-md w-[250px] h-[680px] animate-pulse"></div>;
+  }
+  
+  if (error) {
+    return <div className="mt-3 ml-2">Error: {error.message}</div>;
+  }
+ 
   return (
-    staffPicks && (
-      <div className="p-3 text-black ">
+    staffPicks && topics && (
+      <div className="p-3 text-black">
         <div className="p-3 bg-white text-black rounded-md ">
           <h4 className="font-semibold text-[16px]">Staff Picks</h4>
           {staffPicks.map((item, index) => (
@@ -63,17 +91,25 @@ function Sidebar() {
         <div className="p-3 bg-white text-black rounded-md mt-3 ">
           <h4 className="font-semibold my-4 text-[16px]">Recommended topics</h4>
           <div className="grid grid-cols-2 gap-3">
-            {recommendedTopics.map((item, index) => (
+            {topics.map((item, index) => (
               <div
                 className="bg-gray-600 rounded-full p-2 flex justify-center hover:bg-slate-400 transition-all ease-in-out duration-200"
                 key={index}
               >
-                <p className="text-[12px] text-white">
-                  {item.slice(0, 10) + "..."}
+                <p className="text-[12px] text-white capitalize">
+                  {item.name.length > 10 ? item.name.slice(0, 10) + "..." : item.name}
                 </p>
               </div>
             ))}
           </div>
+          
+        </div>
+        <div className="p-3 bg-white text-black rounded-md mt-3 sticky top-3">
+          <h4 className="font-semibold my-4 text-[16px]">Reading list</h4>
+          <div className=" text-gray-500 ">
+            <span className="flex">Click the <BookmarkPlus/> on any story to </span> easily add it to your reading list or a custom list that you can share.
+          </div>
+          
         </div>
       </div>
     )

@@ -40,7 +40,7 @@ function Header() {
           <div className="lg:flex gap-2 border rounded-md p-2 mr-3 hidden ">
             <Link href="/">
               <Image
-                src="/next.svg"
+                src="/logo.svg"
                 alt="logo"
                 width={0}
                 height={0}
@@ -50,12 +50,12 @@ function Header() {
             </Link>
           </div>
           <div className="flex lg:hidden items-center hover:bg-slate-200 rounded-full p-2">
-            <Drawer direction="left">
+            <Drawer direction="left" snapPoints={[0.5,1]}>
               <DrawerTrigger asChild>
                 <Menu />
               </DrawerTrigger>
-              <DrawerContent className="fixed top-[-100px]">
-                <div className="p-3">
+              <DrawerContent className="top-[-100px] ">  
+                <div className="p-3 ml-[220px] ">
                   <ul className="flex flex-col space-y-2">
                     <li>
                       <strong className="block text-xs font-medium uppercase text-gray-400">
@@ -65,12 +65,9 @@ function Header() {
 
                       <ul className="mt-2 space-y-1">
                         <li>
-                          <a
-                            href="#"
-                            className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-                          >
-                            Profile
-                          </a>
+                          <Link href={'/reading-list'} className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
+                            Reading List
+                          </Link>
                         </li>
 
                         <li>

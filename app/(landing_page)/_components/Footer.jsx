@@ -9,7 +9,7 @@ function Footer() {
             <div className="mb-6 md:mb-0">
               <a href="https://flowbite.com/" className="flex items-center">
                 <img
-                  src="/next.svg"
+                  src="/logo.svg"
                   className="h-8 me-3"
                   alt="FlowBite Logo"
                 />

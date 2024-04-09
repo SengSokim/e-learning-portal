@@ -117,19 +117,19 @@ function BlogCard() {
                         className="hover:bg-gray-200 rounded-full p-2 transition-all ease-in-out duration-200"
                         onClick={() => addToList(item.id)}
                       >
-                        <BookmarkPlus />
+                        <BookmarkPlus color="#696969"/>
                       </div>
                     ) : (
                       <div
                         className="hover:bg-gray-200 rounded-full p-2 transition-all ease-in-out duration-200"
                         onClick={() => removeFromlist(item.id)}
                       >
-                        <BookmarkMinus />
+                        <BookmarkMinus color="#696969"/>
                       </div>
                     )}
 
                     <div className="hover:bg-gray-200 rounded-full p-2 transition-all ease-in-out duration-200">
-                      <MoreHorizontal />
+                      <MoreHorizontal color="#696969"/>
                     </div>
                   </div>
                 </div>

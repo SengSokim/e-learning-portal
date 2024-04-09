@@ -2,7 +2,7 @@ import React from "react";
 
 function SuccessAlert() {
   return (
-    <div className="fixed top-0 right-0 m-5 animate-in slide-in-from-top fade-in transition-all ease-in-out duration-200">
+    <div className="fixed top-0 z-50 right-0 m-5 animate-in slide-in-from-top fade-in transition-all ease-in-out duration-200">
       <div role="alert" className="rounded-xl border border-gray-100 bg-white p-4">
         <div className="flex items-start gap-4">
           <span className="text-green-600">
