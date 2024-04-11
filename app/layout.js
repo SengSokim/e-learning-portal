@@ -1,7 +1,8 @@
 import { Inter, Kantumruy_Pro } from "next/font/google";
 import "./globals.css";
 import Scroll from "@/components/scroll";
-
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const inter = Inter({ subsets: ["latin"] });
 const kamtumruy_pro = Kantumruy_Pro({
   weight: "400",
@@ -16,7 +17,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={kamtumruy_pro.className}>
       <Scroll />
-      <body className="bg-gray-200 h-screen ">{children}</body>
+      <body className="bg-gray-200 h-screen ">
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
