@@ -5,13 +5,17 @@
 @layer base {
   h1 {
     @apply text-2xl;
+    @apply font-bold;
   }
   h2 {
     @apply text-xl;
+    @apply font-bold;
+    @apply py-4;
   }
   h3 {
     @apply text-lg;
     @apply py-4;
+    @apply font-bold;
   }
   h4 {
     @apply text-base;
@@ -21,6 +25,23 @@
   }
   blockquote {
     @apply p-4 my-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800;
+  }
+  code, pre {
+    @apply p-2;
+    @apply my-4;
+    @apply max-w-full;
+    @apply whitespace-pre-wrap;
+    @apply bg-slate-100;
+    @apply rounded;
+    @apply leading-8;
+  }
+  p a {
+    @apply text-violet-500;
+    @apply hover:text-violet-300;
+  }
+  li {
+    @apply list-disc;
+    @apply ml-6;
   }
   :root {
     --background: 0 0% 100%;

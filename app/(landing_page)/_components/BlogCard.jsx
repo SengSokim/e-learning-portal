@@ -79,7 +79,7 @@ function BlogCard() {
                   </div>
                   <div className="lg:flex justify-between items-center">
                     <div>
-                      <div className="mt-3">
+                      <div className="">
                         <h3 className="font-semibold text-[24px]">
                           {item.title}
                         </h3>
@@ -87,7 +87,7 @@ function BlogCard() {
 
                       <p className="my-4 text-zinc-500">{item.excerpt}</p>
                     </div>
-                    <div className="pl-2 my-3">
+                    <div className="pl-2 my-1">
                       <Image
                         width={300}
                         height={300}

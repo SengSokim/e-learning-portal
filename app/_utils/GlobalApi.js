@@ -106,7 +106,7 @@ const getPosts = async (search, userId) => {
   const query =
     gql`
     query Posts {
-      posts( where: {_search: "` +
+      posts( orderBy: date_DESC,where: {_search: "` +
     search +
     `"}){
         id
