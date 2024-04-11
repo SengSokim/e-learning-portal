@@ -8,6 +8,7 @@ import GlobalApi from "@/app/_utils/GlobalApi";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import CommentSection from "./_components/CommentSection";
 
 function Article({ params }) {
   const [post, setPost] = useState();
@@ -40,6 +41,10 @@ function Article({ params }) {
           <div className="mt-3 bg-white rounded-md p-5">
             <RecommendSection recommendations={recommendations}/>
           </div>
+          <div className="mt-3 bg-white rounded-md">
+            <CommentSection comments={post.comments} slug={post.slug} />
+          </div>
+          
         </div>
 
         <div className="hidden lg:flex h-full mt-3">

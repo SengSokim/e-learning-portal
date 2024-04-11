@@ -3,7 +3,6 @@ import Link from "next/link";
 import React from "react";
 
 function RecommendSection({recommendations}) {
-  console.log(recommendations);
   return (
     <div className="">
       <h3 className="font-semibold text-[20px]">Recommendation</h3>

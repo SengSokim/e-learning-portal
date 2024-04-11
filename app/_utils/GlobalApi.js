@@ -160,6 +160,12 @@ const getPostById = async (slugId) => {
           coverImage {
             url
           }
+          comments {
+            id
+            username
+            content
+            date
+          }
         }
       }
     `;
@@ -344,6 +350,39 @@ const getTopics = async () => {
   const result = await request(MASTER_URL, query);
   return result;
 };
+
+const commentOnPost = async (content,date,username,postSlug) => {
+  const query = gql`
+  mutation MyQuery {
+    createComment(
+      data: {content: "` +
+      content +
+      `", date: "`+date+`", username: "`+username+`", post: {connect: {slug: "`+postSlug+`"}}}
+    ) {
+      id
+      username
+      date
+      content
+    }
+    publishManyCommentsConnection {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+    publishManyPostsConnection {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }
+  `;
+  const result = await request(MASTER_URL, query);
+  return result;
+}
 export default {
   getAllCoursesList,
   getSidebanner,
@@ -356,5 +395,6 @@ export default {
   removeFromReadingList,
   staffPicks,
   recommendations,
-  getTopics
+  getTopics,
+  commentOnPost
 };
