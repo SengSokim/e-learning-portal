@@ -56,13 +56,13 @@ function Header() {
               </DrawerTrigger>
               <DrawerContent className="top-[-100px] ">  
                 <div className="p-3 ml-[220px] ">
-                  <ul className="flex flex-col space-y-2">
-                    <li>
+                  <ul className="flex flex-col space-y-2 sidebar-ul">
+                    <li className="">
                       <strong className="block text-xs font-medium uppercase text-gray-400">
                         {" "}
                         General{" "}
                       </strong>
-
+                      
                       <ul className="mt-2 space-y-1">
                         <li>
                           <Link href={'/reading-list'} className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">

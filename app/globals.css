@@ -39,8 +39,8 @@
     @apply text-violet-500;
     @apply hover:text-violet-300;
   }
-  li {
-    @apply list-disc;
+  ul {
+   
     @apply ml-6;
   }
   :root {
