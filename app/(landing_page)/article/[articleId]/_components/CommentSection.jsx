@@ -6,6 +6,8 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { MoreHorizontal } from "lucide-react";
 function CommentSection({comments,slug}) {
     
     const [textComment, setTextComment] = useState();
@@ -24,7 +26,7 @@ function CommentSection({comments,slug}) {
         <section className="bg-white dark:bg-gray-900 py-8 antialiased rounded-md">
             <div className="mx-5">
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+                <h2 className="text-lg lg:text-2xl font-bold text-nightblack dark:text-white">
                 Discussion
                 </h2>
             </div>
@@ -46,7 +48,7 @@ function CommentSection({comments,slug}) {
                 <button
                 type="button"
                 onClick={() => addComment(textComment)}
-                className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-gray-500 transition-all ease-in-out"
+                className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-midnight rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-gray-500 transition-all ease-in-out"
                 >
                 Post comment
                 </button>
@@ -55,76 +57,42 @@ function CommentSection({comments,slug}) {
                 <article className="p-6 text-base bg-white rounded-lg dark:bg-gray-900" key={index}>
                 <footer className="flex justify-between items-center mb-2">
                 <div className="flex items-center">
-                    <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                    <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
                     <Avatar className=" w-8 h-8 mr-2">
-                        <AvatarFallback className="bg-orange-500 uppercase">
+                        <AvatarFallback className="bg-dawn-sky uppercase">
                         {item.username.slice(0,2)}
                         </AvatarFallback>
                     </Avatar>
                     {item.username}
-                    </p>
+                    </div>
                   
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                         <Date dateString={item.date}/>
                     </div>
                 
                 </div>
-                <button
-                    id="dropdownComment1Button"
-                    data-dropdown-toggle="dropdownComment1"
-                    className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    type="button"
-                >
-                    <svg
-                    className="w-4 h-4"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 16 3"
-                    >
-                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                    </svg>
-                    <span className="sr-only">Comment settings</span>
-                </button>
+                
 
-                <div
-                    id="dropdownComment1"
-                    className="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                >
-                    <ul
-                    className="py-1 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownMenuIconHorizontalButton"
-                    >
-                    <li>
-                        <a
-                        href="#"
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                        Edit
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                        href="#"
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                        Remove
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                        href="#"
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                        Report
-                        </a>
-                    </li>
-                    </ul>
-                </div>
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="items-center">
+                        <MoreHorizontal color="#696969"/>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem>
+                            Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            Remove
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            Report
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
                 </footer>
-                <p className="text-gray-500 dark:text-gray-400">
+                <div className="text-gray-500 dark:text-gray-400">
                 {item.content}
-                </p>
+                </div>
                 <div className="flex items-center mt-4 space-x-4">
                 <button
                     type="button"

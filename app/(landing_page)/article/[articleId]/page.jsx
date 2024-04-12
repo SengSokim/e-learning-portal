@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import CommentSection from "./_components/CommentSection";
+import { ArrowUp } from "lucide-react";
 
 function Article({ params }) {
   const [post, setPost] = useState();
@@ -33,6 +34,11 @@ function Article({ params }) {
 
   return post && recommendations ? (
     <div>
+      <div id="top-section-navigation" className="hidden">top</div>
+      <Link href={"#top-section-navigation"} className="fixed bottom-0 right-0 m-3">
+        <ArrowUp />
+      </Link>
+     
       <div className="lg:mx-[150px]  text-black grid grid-cols-2 md:grid-cols-4 lg:p-5">
         <div className="col-span-3 mr-2 ">
           <div className="mt-3 bg-white rounded-md p-5">
@@ -55,10 +61,10 @@ function Article({ params }) {
               <h3 className="font-bold text-[20px] text-zinc-600 ">
                 Learn to code 🧑‍💻
               </h3>
-              <p className="mt-3 text-zinc-600 text-[14px]">
+              <div className="mt-3 text-zinc-600 text-[14px]">
                 Explore free courses on CSS, JS, React, AI Engineering, and UI
                 Design.
-              </p>
+              </div>
               <Image
                 src="/programming1.gif"
                 width={300}
@@ -67,10 +73,12 @@ function Article({ params }) {
               />
 
               <Link href={"/courses"} scroll={true}>
-                <Button className="bg-transparent hover:bg-violet-500 text-violet-700 font-semibold hover:text-white py-2 px-4 border border-violet-500 hover:border-transparent rounded mt-3 w-full">
+                <Button className="bg-transparent hover:bg-midnight text-midnight font-semibold hover:text-white py-2 px-4 border border-midnight hover:border-transparent rounded mt-3 w-full">
                   View Courses
                 </Button>
               </Link>
+              
+      
             </div>
           </div>
         </div>

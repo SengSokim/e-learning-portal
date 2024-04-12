@@ -60,7 +60,7 @@ function Header() {
                     <li className="">
                       <strong className="block text-xs font-medium uppercase text-gray-400">
                         {" "}
-                        General{" "}
+                        TAB{" "}
                       </strong>
                       
                       <ul className="mt-2 space-y-1">
@@ -69,49 +69,13 @@ function Header() {
                             Reading List
                           </Link>
                         </li>
-
-                        <li>
-                          <a
-                            href="#"
-                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            Team
-                          </a>
-                        </li>
-
-                        <li>
-                          <a
-                            href="#"
-                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            Projects
-                          </a>
-                        </li>
-
-                        <li>
-                          <a
-                            href="#"
-                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            Meetings
-                          </a>
-                        </li>
-
-                        <li>
-                          <a
-                            href="#"
-                            className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                          >
-                            Calendar
-                          </a>
-                        </li>
                       </ul>
                     </li>
 
                     <li>
                       <strong className="block text-xs font-medium uppercase text-gray-400">
                         {" "}
-                        Support{" "}
+                        TOPICS{" "}
                       </strong>
 
                       <ul className="mt-2 space-y-1">
@@ -209,14 +173,14 @@ function Header() {
           ) : (
             <div className="flex gap-4 items-center">
               <Link href={"/courses"}>
-                <Button>Courses</Button>
+                <Button className="bg-midnight">Courses</Button>
               </Link>
 
               <DropdownMenu>
                 <DropdownMenuTrigger className="items-center">
                   <Avatar className=" w-8 h-8">
                     {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-                    <AvatarFallback className="bg-orange-300 uppercase">
+                    <AvatarFallback className="bg-dawn-sky uppercase">
                       {initials}
                     </AvatarFallback>
                   </Avatar>

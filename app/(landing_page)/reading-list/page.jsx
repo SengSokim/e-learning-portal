@@ -55,7 +55,7 @@ function Bookmark() {
                     <div className="flex justify-between text-zinc-500">
                       <div className="lg:flex">
                         <Date dateString={item.date} />
-                        <Badge className="ml-3">Web</Badge>
+                        <Badge className="ml-3 bg-midnight">Web</Badge>
                       </div>
                       <div className="text-zinc-600 ml-3 text-[12px]">
                         <h5>3 min read</h5>

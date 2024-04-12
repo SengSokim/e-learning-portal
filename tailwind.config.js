@@ -19,6 +19,12 @@ module.exports = {
     },
     extend: {
       colors: {
+        'midnight':"#023047",
+        'cloudy-sky':"#219EBC",
+        'clear-sky':'#8ECAE6',
+        'dawn-sky':'#FFB703',
+        'sunset-sky':'#FB8500',
+        'nightblack':'#000814',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -52,6 +58,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        
       },
       borderRadius: {
         lg: "var(--radius)",

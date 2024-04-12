@@ -31,7 +31,7 @@ export function Searchbar() {
         onChange={(e) => setSearch(e.target.value)}
         />
 
-        <Button onClick={handleSearch} type="button" className="ml-3 ">
+        <Button onClick={handleSearch} type="button" className="ml-3 bg-midnight">
             <Search className="h-4 w-4" />
         </Button>
     </div>

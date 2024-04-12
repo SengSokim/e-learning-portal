@@ -5,55 +5,22 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { BookmarkPlus } from "lucide-react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-function Sidebar() {
-  const [staffPicks, setStaffPicks] = useState([]);
-  const [topics, setTopics] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  useEffect(() => {
-    Promise.all([getStaffPicks(), getTopics()])
-      .then(() => setLoading(false))
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
-  
-  const getStaffPicks = () => {
-    return GlobalApi.staffPicks()
-      .then((response) => {
-        setStaffPicks(response?.posts || []);
-      })
-      .catch((error) => {
-        // Handle error
-        console.error("Error fetching staff picks:", error);
-        throw error;
-      });
-  };
-  
-  const getTopics = () => {
-    return GlobalApi.getTopics()
-      .then((response) => {
-        setTopics(response?.topics || []);
-      })
-      .catch((error) => {
-        // Handle error
-        console.error("Error fetching topics:", error);
-        throw error;
-      });
-  };
-  
-  if (loading) {
-    return <div className="mt-3 ml-2 p-3 bg-zinc-300 text-black rounded-md w-[250px] h-[680px] animate-pulse"></div>;
+function Sidebar({staffPicks, topics}) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  function handleSearch(search) {
+    const params = new URLSearchParams(searchParams);
+    if (search) {
+      params.set("topic", search);
+    } else {
+      params.delete("topic");
+    }
+    replace(`${pathname}?${params.toString()}`);
   }
-  
-  if (error) {
-    return <div className="mt-3 ml-2">Error: {error.message}</div>;
-  }
- 
   return (
     staffPicks && topics && (
       <div className="p-3 text-black">
@@ -66,7 +33,7 @@ function Sidebar() {
                   <div className="flex items-center">
                     <Avatar className="mr-3 w-8 h-8">
                       {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-                      <AvatarFallback className="bg-orange-300">
+                      <AvatarFallback className="bg-dawn-sky">
                         {item.author.name}
                       </AvatarFallback>
                     </Avatar>
@@ -78,7 +45,7 @@ function Sidebar() {
                   </div>
 
                   <div>
-                    <Badge>{item.tag}</Badge>
+                    <Badge className="bg-midnight">{item.tag}</Badge>
                   </div>
                 </div>
                 <h4 className="font-medium mt-3 text-[14px] group-hover:text-violet-600">
@@ -93,12 +60,13 @@ function Sidebar() {
           <div className="grid grid-cols-2 gap-3">
             {topics.map((item, index) => (
               <div
-                className="bg-gray-600 rounded-full p-2 flex justify-center hover:bg-slate-400 transition-all ease-in-out duration-200"
+                className="bg-midnight rounded-full p-2 flex justify-center hover:bg-slate-400 transition-all ease-in-out duration-200"
                 key={index}
+                onClick={() => handleSearch(item.name)}
               >
-                <p className="text-[12px] text-white capitalize">
+                <div className="text-[12px] text-white capitalize" >
                   {item.name.length > 10 ? item.name.slice(0, 10) + "..." : item.name}
-                </p>
+                </div>
               </div>
             ))}
           </div>
