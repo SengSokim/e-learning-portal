@@ -178,7 +178,7 @@ function BlogCard() {
           : [1, 2, 3].map((item, index) => (
               <div
                 key={index}
-                className="bg-zinc-300 rounded-md p-3 mt-3 h-[280px] animate-pulse"
+                className="bg-zinc-300 rounded-md p-3 mt-3 h-[280px] w-auto animate-pulse"
               ></div>
             ))}
       </div>

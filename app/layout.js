@@ -3,6 +3,7 @@ import "./globals.css";
 import Scroll from "@/components/scroll";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import NextTopLoader from 'nextjs-toploader';
 const inter = Inter({ subsets: ["latin"] });
 const kamtumruy_pro = Kantumruy_Pro({
   weight: "400",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={kamtumruy_pro.className}>
       <Scroll />
       <body className="bg-gray-200 h-screen ">
+        <NextTopLoader color="#219EBC"/>
         {children}
         <Analytics />
         <SpeedInsights />

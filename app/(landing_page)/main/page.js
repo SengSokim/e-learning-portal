@@ -78,7 +78,7 @@ function Main() {
   };
   
   if (loading) {
-    return <div className="mt-3 ml-2 p-3 bg-zinc-300 text-black rounded-md w-[250px] h-[680px] animate-pulse"></div>;
+    return <div className="mt-3 ml-2 p-3 bg-zinc-300 text-black rounded-md w-auto h-[680px] animate-pulse"></div>;
   }
   
   if (error) {
@@ -131,7 +131,6 @@ function Main() {
             </div>
           </div>
 
-          <Separator className="bg-zinc-700 mt-3" />
           <div className="">
             <BlogCard />
           </div>

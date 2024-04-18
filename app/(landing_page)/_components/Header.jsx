@@ -29,10 +29,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { usePathname } from "next/navigation";
 
 function Header() {
   const { user } = useKindeBrowserClient();
   const initials = user?.given_name.slice(0, 2) || "NA";
+  const path = usePathname();
   return (
     <div className="p-4 bg-white">
       <div className="flex justify-between lg:mx-[100px]">
@@ -65,7 +67,7 @@ function Header() {
                       
                       <ul className="mt-2 space-y-1">
                         <li>
-                          <Link href={'/reading-list'} className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
+                          <Link href={'/reading-list'} className={`block rounded-lg hover:bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 ${path.includes('reading-list') && 'bg-midnight text-white'}`}>
                             Reading List
                           </Link>
                         </li>
