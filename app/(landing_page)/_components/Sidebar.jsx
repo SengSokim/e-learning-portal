@@ -38,7 +38,7 @@ function Sidebar({staffPicks, topics}) {
                       </AvatarFallback>
                     </Avatar>
                     <div className="leading-5">
-                      <h5 className="font-medium text-[14px] text-zinc-600 group-hover:text-violet-600">
+                      <h5 className="font-medium text-[14px] text-zinc-600 group-hover:text-cloudy-sky">
                         {item.author.name}
                       </h5>
                     </div>
@@ -48,7 +48,7 @@ function Sidebar({staffPicks, topics}) {
                     <Badge className="bg-midnight">{item.tag}</Badge>
                   </div>
                 </div>
-                <h4 className="font-medium mt-3 text-[14px] group-hover:text-violet-600">
+                <h4 className="font-medium mt-3 text-[14px] group-hover:text-cloudy-sky">
                   {item.title}
                 </h4>
               </div>

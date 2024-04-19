@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={kamtumruy_pro.className}>
       <Scroll />
-      <body className="bg-gray-200 h-screen ">
+      <body className="bg-zinc-100 h-screen ">
         <NextTopLoader color="#219EBC"/>
         {children}
         <Analytics />
