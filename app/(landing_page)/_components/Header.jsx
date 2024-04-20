@@ -58,96 +58,96 @@ function Header() {
               </DrawerTrigger>
               <DrawerContent className="top-[-100px] ">  
                 <div className="p-3 ml-[220px] ">
-                  <ul className="flex flex-col space-y-2 sidebar-ul">
-                    <li className="">
+                  <div className="flex flex-col space-y-2 sidebar-div ">
+                    <div className="">
                       <strong className="block text-xs font-medium uppercase text-gray-400">
                         {" "}
                         TAB{" "}
                       </strong>
                       
-                      <ul className="mt-2 space-y-1">
-                        <li>
+                      <div className="mt-2 space-y-1">
+                        <div>
                           <Link href={'/reading-list'} className={`block rounded-lg hover:bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 ${path.includes('reading-list') && 'bg-midnight text-white'}`}>
                             Reading List
                           </Link>
-                        </li>
-                      </ul>
-                    </li>
+                        </div>
+                      </div>
+                    </div>
 
-                    <li>
+                    <div>
                       <strong className="block text-xs font-medium uppercase text-gray-400">
                         {" "}
                         TOPICS{" "}
                       </strong>
 
-                      <ul className="mt-2 space-y-1">
-                        <li>
+                      <div className="mt-2 space-y-1">
+                        <div>
                           <a
                             href="#"
                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                           >
                             Update
                           </a>
-                        </li>
+                        </div>
 
-                        <li>
+                        <div>
                           <a
                             href="#"
                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                           >
                             Help
                           </a>
-                        </li>
+                        </div>
 
-                        <li>
+                        <div>
                           <a
                             href="#"
                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                           >
                             Settings
                           </a>
-                        </li>
-                      </ul>
-                    </li>
+                        </div>
+                      </div>
+                    </div>
 
-                    <li>
+                    <div>
                       <strong className="block text-xs font-medium uppercase text-gray-400">
                         {" "}
                         Profile{" "}
                       </strong>
 
-                      <ul className="mt-2 space-y-1">
-                        <li>
+                      <div className="mt-2 space-y-1">
+                        <div>
                           <a
                             href="#"
                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                           >
                             Details
                           </a>
-                        </li>
+                        </div>
 
-                        <li>
+                        <div>
                           <a
                             href="#"
                             className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                           >
                             Subscription
                           </a>
-                        </li>
+                        </div>
 
-                        <li>
+                        <div>
                           <form action="#">
                             <button
                               type="submit"
-                              className="block w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
+                              className="block w-fdivl rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-adivgn:_inherit] hover:bg-gray-100 hover:text-gray-700"
                             >
                               Logout
                             </button>
                           </form>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </DrawerContent>
             </Drawer>
