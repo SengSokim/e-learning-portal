@@ -25,7 +25,6 @@
   }
   p {
     @apply leading-relaxed;
-    
     @apply text-[18px];
     @apply mb-4;
   }

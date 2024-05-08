@@ -21,63 +21,65 @@ function Footer() {
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                   Resources
                 </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
+                <div
+                 className="text-gray-500 dark:text-gray-400 font-medium">
+                  <div className="mb-4">
                     <a href="https://flowbite.com/" className="hover:underline">
                       Flowbite
                     </a>
-                  </li>
-                  <li className="mb-4">
+                  </div>
+                  <div className="mb-4">
                     <a href="https://tailwindcss.com/" className="hover:underline">
                       Tailwind CSS
                     </a>
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <a href="https://storyset.com" className="hover:underline">
                       Storyset
                     </a>
-                  </li>
-                </ul>
+                  </div>
+                </div>
+                
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                   Follow us
                 </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
+                <div className="text-gray-500 dark:text-gray-400 font-medium">
+                  <div className="mb-4">
                     <a
                       href="https://github.com/themesberg/flowbite"
                       className="hover:underline "
                     >
                       Github
                     </a>
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <a
                       href="https://discord.gg/4eeurUVvTy"
                       className="hover:underline"
                     >
                       Discord
                     </a>
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                   Legal
                 </h2>
-                <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
+                <div className="text-gray-500 dark:text-gray-400 font-medium">
+                  <div className="mb-4">
                     <a href="#" className="hover:underline">
                       Privacy Policy
                     </a>
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <a href="#" className="hover:underline">
                       Terms &amp; Conditions
                     </a>
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
