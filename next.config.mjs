@@ -4,7 +4,7 @@ const nextConfig = {
         missingSuspenseWithCSRBailout: false,
       },
     images:{
-        domains: ['media.graphassets.com']
+        domains: ['media.graphassets.com','ap-northeast-1.graphassets.com']
     }
 };
 
